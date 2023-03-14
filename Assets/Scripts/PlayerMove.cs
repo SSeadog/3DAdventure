@@ -6,18 +6,14 @@ public class PlayerMove : MonoBehaviour
 {
     [SerializeField] Transform _cam;
     [SerializeField] Collider _sword;
-    [SerializeField] GameObject _gameOver;
-    [SerializeField] Inventory _inven;
+    
     Animator _anim;
-
-    [SerializeField] int _hp = 5;
-    int _coin = 0;
-
-    bool _canHitted = true;
+    Hero _hero;
 
     void Start()
     {
         _anim = GetComponent<Animator>();
+        _hero = GetComponent<Hero>();
     }
 
     void Update()
@@ -74,48 +70,5 @@ public class PlayerMove : MonoBehaviour
     void EndAttack()
     {
         _sword.enabled = false;
-    }
-
-    public void Hitted()
-    {
-        if (!_canHitted)
-            return;
-
-        _hp--;
-        if (_hp <= 0)
-        {
-            // GameOver
-            OnDead();
-        }
-        else
-        {
-            // hitted;
-            _anim.SetTrigger("Hitted");
-        }
-        _canHitted = false;
-        StartCoroutine(CoHittedCoolTime());
-    }
-
-    IEnumerator CoHittedCoolTime()
-    {
-        yield return new WaitForSeconds(1f);
-        _canHitted = true;
-    }
-
-    void OnDead()
-    {
-        _gameOver.SetActive(true);
-        Time.timeScale = 0f;
-    }
-
-    public void AddCoin()
-    {
-        Item item = new Item();
-        int count = Random.Range(1, 100);
-        EItemType eType = (EItemType)Random.Range(1, (int)EItemType.Max - 1);
-        item._eType = eType;
-        item._count = count;
-        _inven.AddItem(item);
-
     }
 }

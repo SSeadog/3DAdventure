@@ -228,7 +228,7 @@ public class Monster : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerMove>().Hitted();
+            other.GetComponent<Hero>().Hitted();
         }
     }
 }

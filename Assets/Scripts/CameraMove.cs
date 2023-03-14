@@ -26,7 +26,7 @@ public class CameraMove : MonoBehaviour
     Vector3 dirNormal;
     float finalDis;
 
-    bool _isMouseVisible = true;
+    bool _isMouseVisible = false;
 
     void Start()
     {
@@ -35,8 +35,9 @@ public class CameraMove : MonoBehaviour
 
         dirNormal = _realCam.localPosition.normalized;
 
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        _isMouseVisible = false;
     }
 
     void Update()
